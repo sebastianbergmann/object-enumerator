@@ -60,7 +60,7 @@ class EnumeratorTest extends \PHPUnit_Framework_TestCase
         $a = new \stdClass;
         $b = new \stdClass;
 
-        $objects = $this->enumerator->enumerate([$a, $b]);
+        $objects = $this->enumerator->enumerate([$a, $b, null]);
 
         $this->assertCount(2, $objects);
         $this->assertSame($a, $objects[0]);
@@ -116,5 +116,12 @@ class EnumeratorTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(InvalidArgumentException::class);
 
         $this->enumerator->enumerate(null);
+    }
+
+    public function testExceptionIsRaisedForInvalidArgument2()
+    {
+        $this->setExpectedException(InvalidArgumentException::class);
+
+        $this->enumerator->enumerate([], '');
     }
 }

@@ -27,7 +27,7 @@ class EnumeratorTest extends \PHPUnit_Framework_TestCase
 
     public function testEnumeratesSingleObject()
     {
-        $a = new \StdClass;
+        $a = new \stdClass;
 
         $objects = $this->enumerator->enumerate($a);
 
@@ -37,7 +37,7 @@ class EnumeratorTest extends \PHPUnit_Framework_TestCase
 
     public function testEnumeratesArrayWithSingleObject()
     {
-        $a = new \StdClass;
+        $a = new \stdClass;
 
         $objects = $this->enumerator->enumerate([$a]);
 
@@ -47,7 +47,7 @@ class EnumeratorTest extends \PHPUnit_Framework_TestCase
 
     public function testEnumeratesArrayWithTwoReferencesToTheSameObject()
     {
-        $a = new \StdClass;
+        $a = new \stdClass;
 
         $objects = $this->enumerator->enumerate([$a, $a]);
 
@@ -57,8 +57,8 @@ class EnumeratorTest extends \PHPUnit_Framework_TestCase
 
     public function testEnumeratesArrayOfObjects()
     {
-        $a = new \StdClass;
-        $b = new \StdClass;
+        $a = new \stdClass;
+        $b = new \stdClass;
 
         $objects = $this->enumerator->enumerate([$a, $b]);
 
@@ -69,8 +69,8 @@ class EnumeratorTest extends \PHPUnit_Framework_TestCase
 
     public function testEnumeratesObjectWithAggregatedObject()
     {
-        $a = new \StdClass;
-        $b = new \StdClass;
+        $a = new \stdClass;
+        $b = new \stdClass;
 
         $a->b = $b;
         $a->c = null;
@@ -84,8 +84,8 @@ class EnumeratorTest extends \PHPUnit_Framework_TestCase
 
     public function testEnumeratesObjectWithAggregatedObjectsInArray()
     {
-        $a = new \StdClass;
-        $b = new \StdClass;
+        $a = new \stdClass;
+        $b = new \stdClass;
 
         $a->b = [$b];
 
@@ -98,8 +98,8 @@ class EnumeratorTest extends \PHPUnit_Framework_TestCase
 
     public function testEnumeratesObjectsWithCyclicReferences()
     {
-        $a = new \StdClass;
-        $b = new \StdClass;
+        $a = new \stdClass;
+        $b = new \stdClass;
 
         $a->b = $b;
         $b->a = $a;

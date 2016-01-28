@@ -12,11 +12,18 @@ namespace SebastianBergmann\ObjectEnumerator;
 
 use SebastianBergmann\RecursionContext\Context;
 
+/**
+ * Traverses array structures and object graphs
+ * to enumerate all referenced objects.
+ */
 class Enumerator
 {
     /**
+     * Returns an array of all objects referenced either
+     * directly or indirectly by a variable.
+     *
      * @param array|object $variable
-     * @param Context      $processed
+     * @param Context      $processed This is for internal use only
      *
      * @return object[]
      */

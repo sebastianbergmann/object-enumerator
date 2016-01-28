@@ -38,11 +38,13 @@ class Enumerator
 
         if (is_array($variable)) {
             foreach ($variable as $element) {
-                $objects = array_merge($objects, $this->enumerate($element, $processed));
+                $objects = array_merge(
+                    $objects,
+                    $this->enumerate($element, $processed)
+                );
             }
         } else {
             $objects[] = $variable;
-
             $reflector = new \ReflectionObject($variable);
 
             foreach ($reflector->getProperties() as $attribute) {
@@ -54,7 +56,10 @@ class Enumerator
                     continue;
                 }
 
-                $objects = array_merge($objects, $this->enumerate($value, $processed));
+                $objects = array_merge(
+                    $objects,
+                    $this->enumerate($value, $processed)
+                );
             }
         }
 

@@ -23,17 +23,22 @@ class Enumerator
      * directly or indirectly by a variable.
      *
      * @param array|object $variable
-     * @param Context      $processed This is for internal use only
      *
      * @return object[]
      */
-    public function enumerate($variable, Context $processed = null)
+    public function enumerate($variable)
     {
         if (!is_array($variable) && !is_object($variable)) {
             throw new InvalidArgumentException;
         }
 
-        if ($processed === null) {
+        if (isset(func_get_args()[1])) {
+            if (!func_get_args()[1] instanceof Context) {
+                throw new InvalidArgumentException;
+            }
+
+            $processed = func_get_args()[1];
+        } else {
             $processed = new Context;
         }
 

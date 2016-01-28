@@ -36,6 +36,8 @@ class Enumerator
             return $objects;
         }
 
+        $processed->add($variable);
+
         if (is_array($variable)) {
             foreach ($variable as $element) {
                 $objects = array_merge(
@@ -62,8 +64,6 @@ class Enumerator
                 );
             }
         }
-
-        $processed->add($variable);
 
         return $objects;
     }

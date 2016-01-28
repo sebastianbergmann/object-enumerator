@@ -96,6 +96,21 @@ class EnumeratorTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($b, $objects[1]);
     }
 
+    public function testEnumeratesObjectsWithCyclicReferences()
+    {
+        $a = new \StdClass;
+        $b = new \StdClass;
+
+        $a->b = $b;
+        $b->a = $a;
+
+        $objects = $this->enumerator->enumerate([$a, $b]);
+
+        $this->assertCount(2, $objects);
+        $this->assertSame($a, $objects[0]);
+        $this->assertSame($b, $objects[1]);
+    }
+
     public function testExceptionIsRaisedForInvalidArgument()
     {
         $this->setExpectedException(InvalidArgumentException::class);

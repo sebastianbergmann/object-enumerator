@@ -52,6 +52,10 @@ class Enumerator
 
         if (is_array($variable)) {
             foreach ($variable as $element) {
+                if (!is_array($element) && !is_object($element)) {
+                    continue;
+                }
+
                 $objects = array_merge(
                     $objects,
                     $this->enumerate($element, $processed)

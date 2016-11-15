@@ -48,10 +48,11 @@ class Enumerator
             return $objects;
         }
 
+        $array = $variable;
         $processed->add($variable);
 
         if (is_array($variable)) {
-            foreach ($variable as $element) {
+            foreach ($array as $element) {
                 if (!is_array($element) && !is_object($element)) {
                     continue;
                 }

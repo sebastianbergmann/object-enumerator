@@ -10,6 +10,8 @@
 
 namespace SebastianBergmann\ObjectEnumerator;
 
+use SebastianBergmann\ObjectEnumerator\Fixtures\ExceptionThrower;
+
 /**
  * @covers SebastianBergmann\ObjectEnumerator\Enumerator
  */
@@ -109,6 +111,15 @@ class EnumeratorTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(2, $objects);
         $this->assertSame($a, $objects[0]);
         $this->assertSame($b, $objects[1]);
+    }
+
+    public function testEnumeratesClassThatThrowsException()
+    {
+        $thrower = new ExceptionThrower();
+
+        $objects = $this->enumerator->enumerate($thrower);
+
+        $this->assertSame($thrower, $objects[0]);
     }
 
     public function testExceptionIsRaisedForInvalidArgument()

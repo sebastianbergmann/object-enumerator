@@ -11,11 +11,12 @@
 namespace SebastianBergmann\ObjectEnumerator;
 
 use SebastianBergmann\ObjectEnumerator\Fixtures\ExceptionThrower;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @covers SebastianBergmann\ObjectEnumerator\Enumerator
  */
-class EnumeratorTest extends \PHPUnit_Framework_TestCase
+class EnumeratorTest extends TestCase
 {
     /**
      * @var Enumerator

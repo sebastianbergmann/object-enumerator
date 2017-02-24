@@ -125,14 +125,14 @@ class EnumeratorTest extends TestCase
 
     public function testExceptionIsRaisedForInvalidArgument()
     {
-        $this->setExpectedException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $this->enumerator->enumerate(null);
     }
 
     public function testExceptionIsRaisedForInvalidArgument2()
     {
-        $this->setExpectedException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
 
         $this->enumerator->enumerate([], '');
     }

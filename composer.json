@@ -9,7 +9,6 @@
             "email": "sebastian@phpunit.de"
         }
     ],
-    "minimum-stability": "dev",
     "require": {
         "php": "^7.0",
         "sebastian/recursion-context": "^3.0"

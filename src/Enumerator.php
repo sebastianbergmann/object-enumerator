@@ -73,8 +73,6 @@ class Enumerator
                     $value = $attribute->getValue($variable);
                 } catch (\Throwable $e) {
                     continue;
-                } catch (\Exception $e) {
-                    continue;
                 }
 
                 if (!is_array($value) && !is_object($value)) {

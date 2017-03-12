@@ -64,17 +64,10 @@ class Enumerator
             }
         } else {
             $objects[] = $variable;
-            $reflector = new \ReflectionObject($variable);
 
-            foreach ($reflector->getProperties() as $attribute) {
-                $attribute->setAccessible(true);
+            $reflector = new ObjectReflector;
 
-                try {
-                    $value = $attribute->getValue($variable);
-                } catch (\Throwable $e) {
-                    continue;
-                }
-
+            foreach ($reflector->getAttributes($variable) as $value) {
                 if (!is_array($value) && !is_object($value)) {
                     continue;
                 }

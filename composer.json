@@ -23,7 +23,7 @@
     },
     "autoload-dev": {
         "classmap": [
-            "tests/"
+            "tests/_fixture/"
         ]
     },
     "extra": {

@@ -2,6 +2,12 @@
 
 All notable changes to `sebastianbergmann/object-enumerator` are documented in this file using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [3.0.2] - 2017-03-12
+
+### Changed
+
+* `sebastian/object-reflector` is now a dependency
+
 ## [3.0.1] - 2017-03-12
 
 ### Fixed
@@ -32,6 +38,7 @@ All notable changes to `sebastianbergmann/object-enumerator` are documented in t
 
 * Initial release
 
+[3.0.2]: https://github.com/sebastianbergmann/object-enumerator/compare/3.0.1...3.0.2
 [3.0.1]: https://github.com/sebastianbergmann/object-enumerator/compare/3.0.0...3.0.1
 [3.0.0]: https://github.com/sebastianbergmann/object-enumerator/compare/2.0...3.0.0
 [2.0.1]: https://github.com/sebastianbergmann/object-enumerator/compare/2.0.0...2.0.1

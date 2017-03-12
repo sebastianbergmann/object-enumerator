@@ -10,6 +10,7 @@
 
 namespace SebastianBergmann\ObjectEnumerator;
 
+use SebastianBergmann\ObjectReflector\ObjectReflector;
 use SebastianBergmann\RecursionContext\Context;
 
 /**

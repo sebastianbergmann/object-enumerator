@@ -11,6 +11,7 @@
     ],
     "require": {
         "php": "^7.0",
+        "sebastian/object-reflector": "^1.0",
         "sebastian/recursion-context": "^3.0"
     },
     "require-dev": {

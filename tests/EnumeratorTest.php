@@ -15,8 +15,6 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @covers SebastianBergmann\ObjectEnumerator\Enumerator
- *
- * @uses SebastianBergmann\ObjectEnumerator\ObjectReflector
  */
 class EnumeratorTest extends TestCase
 {

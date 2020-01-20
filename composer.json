@@ -10,17 +10,18 @@
         }
     ],
     "prefer-stable": true,
+    "minimum-stability": "dev",
     "config": {
         "optimize-autoloader": true,
         "sort-packages": true
     },
     "require": {
-        "php": "^7.0",
+        "php": "^7.3",
         "sebastian/object-reflector": "^1.1.1",
         "sebastian/recursion-context": "^3.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.0"
+        "phpunit/phpunit": "^9.0"
     },
     "autoload": {
         "classmap": [
@@ -34,7 +35,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.0.x-dev"
+            "dev-master": "4.0-dev"
         }
     }
 }

@@ -23,7 +23,7 @@ class EnumeratorTest extends TestCase
      */
     private $enumerator;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->enumerator = new Enumerator;
     }

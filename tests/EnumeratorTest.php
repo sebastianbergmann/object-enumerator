@@ -1,6 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 /*
- * This file is part of Object Enumerator.
+ * This file is part of sebastian/object-enumerator.
  *
  * (c) Sebastian Bergmann <sebastian@phpunit.de>
  *
@@ -10,8 +10,8 @@
 
 namespace SebastianBergmann\ObjectEnumerator;
 
-use SebastianBergmann\ObjectEnumerator\Fixtures\ExceptionThrower;
 use PHPUnit\Framework\TestCase;
+use SebastianBergmann\ObjectEnumerator\Fixtures\ExceptionThrower;
 
 /**
  * @covers SebastianBergmann\ObjectEnumerator\Enumerator
@@ -28,7 +28,7 @@ class EnumeratorTest extends TestCase
         $this->enumerator = new Enumerator;
     }
 
-    public function testEnumeratesSingleObject()
+    public function testEnumeratesSingleObject(): void
     {
         $a = new \stdClass;
 
@@ -38,7 +38,7 @@ class EnumeratorTest extends TestCase
         $this->assertSame($a, $objects[0]);
     }
 
-    public function testEnumeratesArrayWithSingleObject()
+    public function testEnumeratesArrayWithSingleObject(): void
     {
         $a = new \stdClass;
 
@@ -48,7 +48,7 @@ class EnumeratorTest extends TestCase
         $this->assertSame($a, $objects[0]);
     }
 
-    public function testEnumeratesArrayWithTwoReferencesToTheSameObject()
+    public function testEnumeratesArrayWithTwoReferencesToTheSameObject(): void
     {
         $a = new \stdClass;
 
@@ -58,7 +58,7 @@ class EnumeratorTest extends TestCase
         $this->assertSame($a, $objects[0]);
     }
 
-    public function testEnumeratesArrayOfObjects()
+    public function testEnumeratesArrayOfObjects(): void
     {
         $a = new \stdClass;
         $b = new \stdClass;
@@ -70,7 +70,7 @@ class EnumeratorTest extends TestCase
         $this->assertSame($b, $objects[1]);
     }
 
-    public function testEnumeratesObjectWithAggregatedObject()
+    public function testEnumeratesObjectWithAggregatedObject(): void
     {
         $a = new \stdClass;
         $b = new \stdClass;
@@ -85,7 +85,7 @@ class EnumeratorTest extends TestCase
         $this->assertSame($b, $objects[1]);
     }
 
-    public function testEnumeratesObjectWithAggregatedObjectsInArray()
+    public function testEnumeratesObjectWithAggregatedObjectsInArray(): void
     {
         $a = new \stdClass;
         $b = new \stdClass;
@@ -99,7 +99,7 @@ class EnumeratorTest extends TestCase
         $this->assertSame($b, $objects[1]);
     }
 
-    public function testEnumeratesObjectsWithCyclicReferences()
+    public function testEnumeratesObjectsWithCyclicReferences(): void
     {
         $a = new \stdClass;
         $b = new \stdClass;
@@ -114,7 +114,7 @@ class EnumeratorTest extends TestCase
         $this->assertSame($b, $objects[1]);
     }
 
-    public function testEnumeratesClassThatThrowsException()
+    public function testEnumeratesClassThatThrowsException(): void
     {
         $thrower = new ExceptionThrower();
 
@@ -123,14 +123,14 @@ class EnumeratorTest extends TestCase
         $this->assertSame($thrower, $objects[0]);
     }
 
-    public function testExceptionIsRaisedForInvalidArgument()
+    public function testExceptionIsRaisedForInvalidArgument(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
         $this->enumerator->enumerate(null);
     }
 
-    public function testExceptionIsRaisedForInvalidArgument2()
+    public function testExceptionIsRaisedForInvalidArgument2(): void
     {
         $this->expectException(InvalidArgumentException::class);
 

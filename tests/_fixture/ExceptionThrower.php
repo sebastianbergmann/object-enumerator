@@ -1,6 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 /*
- * This file is part of Object Enumerator.
+ * This file is part of sebastian/object-enumerator.
  *
  * (c) Sebastian Bergmann <sebastian@phpunit.de>
  *
@@ -18,10 +18,10 @@ class ExceptionThrower
 
     public function __construct()
     {
-        unset($this->property);
+        $this->property = null;
     }
 
-    public function __get($property)
+    public function __get($property): void
     {
         throw new RuntimeException;
     }

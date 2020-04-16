@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 use SebastianBergmann\ObjectEnumerator\Fixtures\ExceptionThrower;
 
 /**
- * @covers SebastianBergmann\ObjectEnumerator\Enumerator
+ * @covers \SebastianBergmann\ObjectEnumerator\Enumerator
  */
 class EnumeratorTest extends TestCase
 {

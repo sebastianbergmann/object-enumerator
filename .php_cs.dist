@@ -8,7 +8,10 @@ For the full copyright and license information, please view the LICENSE
 file that was distributed with this source code.
 EOF;
 
-$finder = PhpCsFixer\Finder::create()->in(__DIR__);
+$finder = PhpCsFixer\Finder::create()
+    ->files()
+    ->in(__DIR__ . '/src')
+    ->in(__DIR__ . '/tests/unit');
 
 return PhpCsFixer\Config::create()
     ->setFinder($finder)

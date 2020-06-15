@@ -2,6 +2,12 @@
 
 All notable changes to `sebastianbergmann/object-enumerator` are documented in this file using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [4.0.1] - 2020-06-15
+
+### Changed
+
+* Tests etc. are now ignored for archive exports
+
 ## [4.0.0] - 2020-02-07
 
 ### Removed
@@ -50,7 +56,8 @@ All notable changes to `sebastianbergmann/object-enumerator` are documented in t
 
 * Initial release
 
-[4.0.0]: https://github.com/sebastianbergmann/object-enumerator/compare/3.0.3...master
+[4.0.1]: https://github.com/sebastianbergmann/object-enumerator/compare/4.0.0...4.0.1
+[4.0.0]: https://github.com/sebastianbergmann/object-enumerator/compare/3.0.3...4.0.0
 [3.0.3]: https://github.com/sebastianbergmann/object-enumerator/compare/3.0.2...3.0.3
 [3.0.2]: https://github.com/sebastianbergmann/object-enumerator/compare/3.0.1...3.0.2
 [3.0.1]: https://github.com/sebastianbergmann/object-enumerator/compare/3.0.0...3.0.1

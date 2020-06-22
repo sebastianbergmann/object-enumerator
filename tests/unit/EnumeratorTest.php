@@ -11,6 +11,7 @@ namespace SebastianBergmann\ObjectEnumerator;
 
 use PHPUnit\Framework\TestCase;
 use SebastianBergmann\ObjectEnumerator\Fixtures\ExceptionThrower;
+use stdClass;
 
 /**
  * @covers \SebastianBergmann\ObjectEnumerator\Enumerator
@@ -29,7 +30,7 @@ class EnumeratorTest extends TestCase
 
     public function testEnumeratesSingleObject(): void
     {
-        $a = new \stdClass;
+        $a = new stdClass;
 
         $objects = $this->enumerator->enumerate($a);
 
@@ -39,7 +40,7 @@ class EnumeratorTest extends TestCase
 
     public function testEnumeratesArrayWithSingleObject(): void
     {
-        $a = new \stdClass;
+        $a = new stdClass;
 
         $objects = $this->enumerator->enumerate([$a]);
 
@@ -49,7 +50,7 @@ class EnumeratorTest extends TestCase
 
     public function testEnumeratesArrayWithTwoReferencesToTheSameObject(): void
     {
-        $a = new \stdClass;
+        $a = new stdClass;
 
         $objects = $this->enumerator->enumerate([$a, $a]);
 
@@ -59,8 +60,8 @@ class EnumeratorTest extends TestCase
 
     public function testEnumeratesArrayOfObjects(): void
     {
-        $a = new \stdClass;
-        $b = new \stdClass;
+        $a = new stdClass;
+        $b = new stdClass;
 
         $objects = $this->enumerator->enumerate([$a, $b, null]);
 
@@ -71,8 +72,8 @@ class EnumeratorTest extends TestCase
 
     public function testEnumeratesObjectWithAggregatedObject(): void
     {
-        $a = new \stdClass;
-        $b = new \stdClass;
+        $a = new stdClass;
+        $b = new stdClass;
 
         $a->b = $b;
         $a->c = null;
@@ -86,8 +87,8 @@ class EnumeratorTest extends TestCase
 
     public function testEnumeratesObjectWithAggregatedObjectsInArray(): void
     {
-        $a = new \stdClass;
-        $b = new \stdClass;
+        $a = new stdClass;
+        $b = new stdClass;
 
         $a->b = [$b];
 
@@ -100,8 +101,8 @@ class EnumeratorTest extends TestCase
 
     public function testEnumeratesObjectsWithCyclicReferences(): void
     {
-        $a = new \stdClass;
-        $b = new \stdClass;
+        $a = new stdClass;
+        $b = new stdClass;
 
         $a->b = $b;
         $b->a = $a;

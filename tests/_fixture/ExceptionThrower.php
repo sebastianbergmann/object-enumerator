@@ -20,7 +20,7 @@ class ExceptionThrower
         $this->property = null;
     }
 
-    public function __get($property)
+    public function __get($property): void
     {
         throw new RuntimeException;
     }

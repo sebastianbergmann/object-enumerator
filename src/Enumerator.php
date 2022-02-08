@@ -62,7 +62,7 @@ final class Enumerator
         } else {
             $objects[] = $variable;
 
-            foreach ((new ObjectReflector)->getAttributes($variable) as $value) {
+            foreach ((new ObjectReflector)->getProperties($variable) as $value) {
                 if (!is_array($value) && !is_object($value)) {
                     continue;
                 }

@@ -59,20 +59,22 @@ final class Enumerator
                     $this->enumerate($element, $processed)
                 );
             }
-        } else {
-            $objects[] = $variable;
 
-            foreach ((new ObjectReflector)->getProperties($variable) as $value) {
-                if (!is_array($value) && !is_object($value)) {
-                    continue;
-                }
+            return $objects;
+        }
 
-                /** @noinspection SlowArrayOperationsInLoopInspection */
-                $objects = array_merge(
-                    $objects,
-                    $this->enumerate($value, $processed)
-                );
+        $objects[] = $variable;
+
+        foreach ((new ObjectReflector)->getProperties($variable) as $value) {
+            if (!is_array($value) && !is_object($value)) {
+                continue;
             }
+
+            /** @noinspection SlowArrayOperationsInLoopInspection */
+            $objects = array_merge(
+                $objects,
+                $this->enumerate($value, $processed)
+            );
         }
 
         return $objects;

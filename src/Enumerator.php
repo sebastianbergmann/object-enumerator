@@ -10,8 +10,6 @@
 namespace SebastianBergmann\ObjectEnumerator;
 
 use function array_merge;
-use function assert;
-use function func_get_args;
 use function is_array;
 use function is_object;
 use SebastianBergmann\ObjectReflector\ObjectReflector;
@@ -22,20 +20,8 @@ final class Enumerator
     /**
      * @psalm-return list<object>
      */
-    public function enumerate(array|object $variable): array
+    public function enumerate(array|object $variable, Context $processed = new Context): array
     {
-        if (isset(func_get_args()[1])) {
-            if (!func_get_args()[1] instanceof Context) {
-                throw new InvalidArgumentException;
-            }
-
-            $processed = func_get_args()[1];
-        } else {
-            $processed = new Context;
-        }
-
-        assert($processed instanceof Context);
-
         $objects = [];
 
         if ($processed->contains($variable)) {

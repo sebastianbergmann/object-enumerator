@@ -122,11 +122,4 @@ class EnumeratorTest extends TestCase
 
         $this->assertSame($thrower, $objects[0]);
     }
-
-    public function testExceptionIsRaisedForInvalidArgument(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        $this->enumerator->enumerate([], '');
-    }
 }

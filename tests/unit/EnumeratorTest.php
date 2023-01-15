@@ -9,13 +9,12 @@
  */
 namespace SebastianBergmann\ObjectEnumerator;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use SebastianBergmann\ObjectEnumerator\Fixtures\ExceptionThrower;
 use stdClass;
 
-/**
- * @covers \SebastianBergmann\ObjectEnumerator\Enumerator
- */
+#[CoversClass(Enumerator::class)]
 class EnumeratorTest extends TestCase
 {
     /**

@@ -2,7 +2,7 @@
 
 All notable changes to `sebastianbergmann/object-enumerator` are documented in this file using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## [5.0.0] - 2022-MM-DD
+## [5.0.0] - 2023-02-03
 
 ### Removed
 
@@ -80,7 +80,7 @@ All notable changes to `sebastianbergmann/object-enumerator` are documented in t
 
 * Initial release
 
-[5.0.0]: https://github.com/sebastianbergmann/object-enumerator/compare/4.0.4...master
+[5.0.0]: https://github.com/sebastianbergmann/object-enumerator/compare/4.0.4...main
 [4.0.4]: https://github.com/sebastianbergmann/object-enumerator/compare/4.0.3...4.0.4
 [4.0.3]: https://github.com/sebastianbergmann/object-enumerator/compare/4.0.2...4.0.3
 [4.0.2]: https://github.com/sebastianbergmann/object-enumerator/compare/4.0.1...4.0.2

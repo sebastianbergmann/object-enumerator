@@ -116,7 +116,7 @@ class EnumeratorTest extends TestCase
 
     public function testEnumeratesClassThatThrowsException(): void
     {
-        $thrower = new ExceptionThrower();
+        $thrower = new ExceptionThrower;
 
         $objects = $this->enumerator->enumerate($thrower);
 

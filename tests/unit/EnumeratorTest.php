@@ -17,21 +17,11 @@ use stdClass;
 #[CoversClass(Enumerator::class)]
 class EnumeratorTest extends TestCase
 {
-    /**
-     * @var Enumerator
-     */
-    private $enumerator;
-
-    protected function setUp(): void
-    {
-        $this->enumerator = new Enumerator;
-    }
-
     public function testEnumeratesSingleObject(): void
     {
         $a = new stdClass;
 
-        $objects = $this->enumerator->enumerate($a);
+        $objects = (new Enumerator)->enumerate($a);
 
         $this->assertCount(1, $objects);
         $this->assertSame($a, $objects[0]);
@@ -41,7 +31,7 @@ class EnumeratorTest extends TestCase
     {
         $a = new stdClass;
 
-        $objects = $this->enumerator->enumerate([$a]);
+        $objects = (new Enumerator)->enumerate([$a]);
 
         $this->assertCount(1, $objects);
         $this->assertSame($a, $objects[0]);
@@ -51,7 +41,7 @@ class EnumeratorTest extends TestCase
     {
         $a = new stdClass;
 
-        $objects = $this->enumerator->enumerate([$a, $a]);
+        $objects = (new Enumerator)->enumerate([$a, $a]);
 
         $this->assertCount(1, $objects);
         $this->assertSame($a, $objects[0]);
@@ -62,7 +52,7 @@ class EnumeratorTest extends TestCase
         $a = new stdClass;
         $b = new stdClass;
 
-        $objects = $this->enumerator->enumerate([$a, $b, null]);
+        $objects = (new Enumerator)->enumerate([$a, $b, null]);
 
         $this->assertCount(2, $objects);
         $this->assertSame($a, $objects[0]);
@@ -77,7 +67,7 @@ class EnumeratorTest extends TestCase
         $a->b = $b;
         $a->c = null;
 
-        $objects = $this->enumerator->enumerate($a);
+        $objects = (new Enumerator)->enumerate($a);
 
         $this->assertCount(2, $objects);
         $this->assertSame($a, $objects[0]);
@@ -91,7 +81,7 @@ class EnumeratorTest extends TestCase
 
         $a->b = [$b];
 
-        $objects = $this->enumerator->enumerate($a);
+        $objects = (new Enumerator)->enumerate($a);
 
         $this->assertCount(2, $objects);
         $this->assertSame($a, $objects[0]);
@@ -106,7 +96,7 @@ class EnumeratorTest extends TestCase
         $a->b = $b;
         $b->a = $a;
 
-        $objects = $this->enumerator->enumerate([$a, $b]);
+        $objects = (new Enumerator)->enumerate([$a, $b]);
 
         $this->assertCount(2, $objects);
         $this->assertSame($a, $objects[0]);
@@ -117,7 +107,7 @@ class EnumeratorTest extends TestCase
     {
         $thrower = new ExceptionThrower;
 
-        $objects = $this->enumerator->enumerate($thrower);
+        $objects = (new Enumerator)->enumerate($thrower);
 
         $this->assertSame($thrower, $objects[0]);
     }

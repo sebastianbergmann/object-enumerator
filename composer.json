@@ -9,6 +9,10 @@
             "email": "sebastian@phpunit.de"
         }
     ],
+    "support": {
+        "issues": "https://github.com/sebastianbergmann/object-enumerator/issues",
+        "security": "https://github.com/sebastianbergmann/object-enumerator/security/policy"
+    },
     "prefer-stable": true,
     "config": {
         "platform": {

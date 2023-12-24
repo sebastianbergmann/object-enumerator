@@ -42,7 +42,7 @@ final class Enumerator
                 /** @noinspection SlowArrayOperationsInLoopInspection */
                 $objects = array_merge(
                     $objects,
-                    $this->enumerate($element, $processed)
+                    $this->enumerate($element, $processed),
                 );
             }
 
@@ -59,7 +59,7 @@ final class Enumerator
             /** @noinspection SlowArrayOperationsInLoopInspection */
             $objects = array_merge(
                 $objects,
-                $this->enumerate($value, $processed)
+                $this->enumerate($value, $processed),
             );
         }
 

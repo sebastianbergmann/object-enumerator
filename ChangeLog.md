@@ -86,7 +86,7 @@ All notable changes to `sebastianbergmann/object-enumerator` are documented in t
 
 * Initial release
 
-[6.0.0]: https://github.com/sebastianbergmann/object-enumerator/compare/5.0...main
+[6.0.0]: https://github.com/sebastianbergmann/object-enumerator/compare/5.0...6.0.0
 [5.0.0]: https://github.com/sebastianbergmann/object-enumerator/compare/4.0.4...5.0.0
 [4.0.4]: https://github.com/sebastianbergmann/object-enumerator/compare/4.0.3...4.0.4
 [4.0.3]: https://github.com/sebastianbergmann/object-enumerator/compare/4.0.2...4.0.3

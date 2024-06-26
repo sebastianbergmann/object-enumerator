@@ -18,7 +18,7 @@ use SebastianBergmann\RecursionContext\Context;
 final class Enumerator
 {
     /**
-     * @psalm-return list<object>
+     * @return list<object>
      */
     public function enumerate(array|object $variable, Context $processed = new Context): array
     {

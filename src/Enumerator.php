@@ -26,7 +26,7 @@ final class Enumerator
     {
         $objects = [];
 
-        if ($processed->contains($variable)) {
+        if ($processed->contains($variable) !== false) {
             return $objects;
         }
 

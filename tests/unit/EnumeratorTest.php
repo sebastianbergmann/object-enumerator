@@ -15,7 +15,7 @@ use SebastianBergmann\ObjectEnumerator\Fixtures\ExceptionThrower;
 use stdClass;
 
 #[CoversClass(Enumerator::class)]
-class EnumeratorTest extends TestCase
+final class EnumeratorTest extends TestCase
 {
     public function testEnumeratesSingleObject(): void
     {

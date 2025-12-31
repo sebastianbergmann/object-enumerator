@@ -2,6 +2,12 @@
 
 All notable changes to `sebastianbergmann/object-enumerator` are documented in this file using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [8.0.0] - 2026-02-06
+
+### Removed
+
+* This component is no longer supported on PHP 8.3
+
 ## [7.0.0] - 2025-02-07
 
 ### Removed
@@ -98,6 +104,7 @@ All notable changes to `sebastianbergmann/object-enumerator` are documented in t
 
 * Initial release
 
+[8.0.0]: https://github.com/sebastianbergmann/object-enumerator/compare/7.0...main
 [7.0.0]: https://github.com/sebastianbergmann/object-enumerator/compare/6.0...7.0.0
 [6.0.1]: https://github.com/sebastianbergmann/object-enumerator/compare/6.0.0...6.0.1
 [6.0.0]: https://github.com/sebastianbergmann/object-enumerator/compare/5.0...6.0.0

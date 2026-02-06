@@ -13,7 +13,6 @@
         "issues": "https://github.com/sebastianbergmann/object-enumerator/issues",
         "security": "https://github.com/sebastianbergmann/object-enumerator/security/policy"
     },
-    "minimum-stability": "dev",
     "prefer-stable": true,
     "config": {
         "platform": {

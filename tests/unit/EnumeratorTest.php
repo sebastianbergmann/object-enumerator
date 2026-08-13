@@ -9,14 +9,28 @@
  */
 namespace SebastianBergmann\ObjectEnumerator;
 
+use function array_keys;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use SebastianBergmann\ObjectEnumerator\Fixtures\ChildClass;
 use SebastianBergmann\ObjectEnumerator\Fixtures\ExceptionThrower;
+use SebastianBergmann\ObjectEnumerator\Fixtures\ParentClass;
+use SebastianBergmann\RecursionContext\Context;
 use stdClass;
 
 #[CoversClass(Enumerator::class)]
 final class EnumeratorTest extends TestCase
 {
+    public function testEnumeratesEmptyArray(): void
+    {
+        $this->assertSame([], (new Enumerator)->enumerate([]));
+    }
+
+    public function testEnumeratesArrayWithNoObjects(): void
+    {
+        $this->assertSame([], (new Enumerator)->enumerate([1, 'string', 2.0, true, null]));
+    }
+
     public function testEnumeratesSingleObject(): void
     {
         $a = new stdClass;
@@ -103,12 +117,94 @@ final class EnumeratorTest extends TestCase
         $this->assertSame($b, $objects[1]);
     }
 
+    public function testEnumeratesObjectWithAggregatedObjectsInNestedArrays(): void
+    {
+        $a = new stdClass;
+        $b = new stdClass;
+
+        $a->b = [[['c' => $b]]];
+
+        $objects = (new Enumerator)->enumerate($a);
+
+        $this->assertCount(2, $objects);
+        $this->assertSame($a, $objects[0]);
+        $this->assertSame($b, $objects[1]);
+    }
+
+    public function testEnumeratesArrayWithTwoReferencesToTheSameArray(): void
+    {
+        $a = new stdClass;
+        $b = [$a];
+
+        $objects = (new Enumerator)->enumerate([$b, $b]);
+
+        $this->assertCount(1, $objects);
+        $this->assertSame($a, $objects[0]);
+    }
+
+    public function testEnumeratesPrivateProtectedAndInheritedProperties(): void
+    {
+        $a = new stdClass;
+        $b = new stdClass;
+        $c = new stdClass;
+        $d = new stdClass;
+
+        $child = new ChildClass($a, $b, $c, $d);
+
+        $objects = (new Enumerator)->enumerate($child);
+
+        $this->assertCount(5, $objects);
+        $this->assertSame($child, $objects[0]);
+        $this->assertContains($a, $objects);
+        $this->assertContains($b, $objects);
+        $this->assertContains($c, $objects);
+        $this->assertContains($d, $objects);
+    }
+
+    public function testEnumeratesPropertiesDeclaredInParentClass(): void
+    {
+        $a = new stdClass;
+
+        $parent = new ParentClass($a, null, null);
+
+        $objects = (new Enumerator)->enumerate($parent);
+
+        $this->assertCount(2, $objects);
+        $this->assertSame($parent, $objects[0]);
+        $this->assertSame($a, $objects[1]);
+    }
+
+    public function testDoesNotModifyArrayThatIsEnumerated(): void
+    {
+        $array = ['object' => new stdClass, 'value' => 1];
+
+        (new Enumerator)->enumerate($array);
+
+        $this->assertSame(['object', 'value'], array_keys($array));
+    }
+
+    public function testDoesNotEnumerateObjectsAlreadyContainedInContextThatIsPassed(): void
+    {
+        $a = new stdClass;
+        $b = new stdClass;
+
+        $context = new Context;
+
+        $this->assertCount(1, (new Enumerator)->enumerate($a, $context));
+
+        $objects = (new Enumerator)->enumerate([$a, $b], $context);
+
+        $this->assertCount(1, $objects);
+        $this->assertSame($b, $objects[0]);
+    }
+
     public function testEnumeratesClassThatThrowsException(): void
     {
         $thrower = new ExceptionThrower;
 
         $objects = (new Enumerator)->enumerate($thrower);
 
+        $this->assertCount(1, $objects);
         $this->assertSame($thrower, $objects[0]);
     }
 }

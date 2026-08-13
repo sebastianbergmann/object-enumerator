@@ -11,7 +11,6 @@ namespace SebastianBergmann\ObjectEnumerator;
 
 use function is_array;
 use function is_object;
-use SebastianBergmann\ObjectReflector\ObjectReflector;
 use SebastianBergmann\RecursionContext\Context;
 
 final class Enumerator
@@ -62,7 +61,7 @@ final class Enumerator
 
         $objects[] = $variable;
 
-        foreach ((new ObjectReflector)->getProperties($variable) as $value) {
+        foreach ((array) $variable as $value) {
             if (is_array($value) || is_object($value)) {
                 $this->process($value, $processed, $objects);
             }

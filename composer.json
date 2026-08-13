@@ -23,7 +23,6 @@
     },
     "require": {
         "php": ">=8.4",
-        "sebastian/object-reflector": "^6.0",
         "sebastian/recursion-context": "^8.0.1"
     },
     "require-dev": {

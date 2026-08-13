@@ -13,6 +13,9 @@ use function array_keys;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use SebastianBergmann\ObjectEnumerator\Fixtures\ChildClass;
+use SebastianBergmann\ObjectEnumerator\Fixtures\ClassWithHookedProperty;
+use SebastianBergmann\ObjectEnumerator\Fixtures\ClassWithThrowingPropertyHook;
+use SebastianBergmann\ObjectEnumerator\Fixtures\ClassWithVirtualProperty;
 use SebastianBergmann\ObjectEnumerator\Fixtures\ExceptionThrower;
 use SebastianBergmann\ObjectEnumerator\Fixtures\ParentClass;
 use SebastianBergmann\RecursionContext\Context;
@@ -243,6 +246,48 @@ final class EnumeratorTest extends TestCase
 
         $this->assertCount(1, $objects);
         $this->assertSame($b, $objects[0]);
+    }
+
+    public function testEnumeratesObjectAggregatedUsingBackedHookedProperty(): void
+    {
+        $a = new stdClass;
+        $b = new ClassWithHookedProperty($a);
+
+        $objects = (new Enumerator)->enumerate($b);
+
+        $this->assertCount(2, $objects);
+        $this->assertSame($b, $objects[0]);
+        $this->assertSame($a, $objects[1]);
+    }
+
+    public function testEnumeratesObjectWithBackedHookedPropertyThatIsNull(): void
+    {
+        $a = new ClassWithHookedProperty(null);
+
+        $objects = (new Enumerator)->enumerate($a);
+
+        $this->assertCount(1, $objects);
+        $this->assertSame($a, $objects[0]);
+    }
+
+    public function testDoesNotEnumerateObjectsReturnedByVirtualProperty(): void
+    {
+        $a = new ClassWithVirtualProperty;
+
+        $objects = (new Enumerator)->enumerate($a);
+
+        $this->assertCount(1, $objects);
+        $this->assertSame($a, $objects[0]);
+    }
+
+    public function testDoesNotInvokeGetHookOfHookedProperty(): void
+    {
+        $a = new ClassWithThrowingPropertyHook;
+
+        $objects = (new Enumerator)->enumerate($a);
+
+        $this->assertCount(1, $objects);
+        $this->assertSame($a, $objects[0]);
     }
 
     public function testEnumeratesClassThatThrowsException(): void

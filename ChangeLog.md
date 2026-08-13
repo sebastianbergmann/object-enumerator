@@ -8,6 +8,10 @@ All notable changes to `sebastianbergmann/object-enumerator` are documented in t
 
 * `Enumerator::enumerate()` is now significantly faster for large object graphs
 
+### Fixed
+
+* `Enumerator::enumerate()` no longer recurses infinitely on arrays that reference themselves
+
 ## [8.0.0] - 2026-02-06
 
 ### Removed

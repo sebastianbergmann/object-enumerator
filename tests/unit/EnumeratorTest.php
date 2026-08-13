@@ -174,6 +174,53 @@ final class EnumeratorTest extends TestCase
         $this->assertSame($a, $objects[1]);
     }
 
+    public function testEnumeratesArrayThatReferencesItself(): void
+    {
+        $a = new stdClass;
+
+        $array         = ['object' => $a];
+        $array['self'] = &$array;
+
+        $objects = (new Enumerator)->enumerate($array);
+
+        $this->assertCount(1, $objects);
+        $this->assertSame($a, $objects[0]);
+    }
+
+    public function testEnumeratesArraysThatReferenceEachOther(): void
+    {
+        $a = new stdClass;
+
+        $first  = [];
+        $second = [];
+
+        $first['second'] = &$second;
+        $second['first'] = &$first;
+        $first['object'] = $a;
+
+        $objects = (new Enumerator)->enumerate($first);
+
+        $this->assertCount(1, $objects);
+        $this->assertSame($a, $objects[0]);
+    }
+
+    public function testEnumeratesObjectThatAggregatesArrayThatReferencesItself(): void
+    {
+        $a = new stdClass;
+
+        $array         = ['object' => $a];
+        $array['self'] = &$array;
+
+        $b       = new stdClass;
+        $b->data = $array;
+
+        $objects = (new Enumerator)->enumerate($b);
+
+        $this->assertCount(2, $objects);
+        $this->assertSame($b, $objects[0]);
+        $this->assertSame($a, $objects[1]);
+    }
+
     public function testDoesNotModifyArrayThatIsEnumerated(): void
     {
         $array = ['object' => new stdClass, 'value' => 1];

@@ -33,7 +33,7 @@ final class Enumerator
      * @param array<mixed>|object $variable
      * @param list<object>        $objects
      */
-    private function process(array|object $variable, Context $processed, array &$objects): void
+    private function process(array|object &$variable, Context $processed, array &$objects): void
     {
         if ($processed->contains($variable) !== false) {
             return;
@@ -47,7 +47,7 @@ final class Enumerator
             /* @noinspection UnusedFunctionResultInspection */
             $processed->add($variable);
 
-            foreach ($array as $element) {
+            foreach ($array as &$element) {
                 if (is_array($element) || is_object($element)) {
                     $this->process($element, $processed, $objects);
                 }

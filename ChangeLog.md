@@ -2,6 +2,12 @@
 
 All notable changes to `sebastianbergmann/object-enumerator` are documented in this file using the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## [8.1.0] - 2026-MM-DD
+
+### Changed
+
+* `Enumerator::enumerate()` is now significantly faster for large object graphs
+
 ## [8.0.0] - 2026-02-06
 
 ### Removed
@@ -104,6 +110,7 @@ All notable changes to `sebastianbergmann/object-enumerator` are documented in t
 
 * Initial release
 
+[8.1.0]: https://github.com/sebastianbergmann/object-enumerator/compare/8.0.0...main
 [8.0.0]: https://github.com/sebastianbergmann/object-enumerator/compare/7.0...8.0.0
 [7.0.0]: https://github.com/sebastianbergmann/object-enumerator/compare/6.0...7.0.0
 [6.0.1]: https://github.com/sebastianbergmann/object-enumerator/compare/6.0.0...6.0.1

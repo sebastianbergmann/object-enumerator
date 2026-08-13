@@ -12,8 +12,10 @@ namespace SebastianBergmann\ObjectEnumerator;
 use function array_keys;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass;
 use SebastianBergmann\ObjectEnumerator\Fixtures\ChildClass;
 use SebastianBergmann\ObjectEnumerator\Fixtures\ClassWithHookedProperty;
+use SebastianBergmann\ObjectEnumerator\Fixtures\ClassWithPublicProperties;
 use SebastianBergmann\ObjectEnumerator\Fixtures\ClassWithThrowingPropertyHook;
 use SebastianBergmann\ObjectEnumerator\Fixtures\ClassWithVirtualProperty;
 use SebastianBergmann\ObjectEnumerator\Fixtures\ExceptionThrower;
@@ -288,6 +290,96 @@ final class EnumeratorTest extends TestCase
 
         $this->assertCount(1, $objects);
         $this->assertSame($a, $objects[0]);
+    }
+
+    public function testDoesNotInitializeLazyGhost(): void
+    {
+        $initialized = false;
+
+        $lazy = (new ReflectionClass(ClassWithPublicProperties::class))->newLazyGhost(
+            static function (ClassWithPublicProperties $object) use (&$initialized): void
+            {
+                $initialized = true;
+
+                $object->object = new stdClass;
+            },
+        );
+
+        $objects = (new Enumerator)->enumerate($lazy);
+
+        $this->assertFalse($initialized);
+        $this->assertCount(1, $objects);
+        $this->assertSame($lazy, $objects[0]);
+    }
+
+    public function testDoesNotInitializeLazyProxy(): void
+    {
+        $initialized = false;
+
+        $lazy = (new ReflectionClass(ClassWithPublicProperties::class))->newLazyProxy(
+            static function (ClassWithPublicProperties $object) use (&$initialized): ClassWithPublicProperties
+            {
+                $initialized = true;
+
+                $real         = new ClassWithPublicProperties;
+                $real->object = new stdClass;
+
+                return $real;
+            },
+        );
+
+        $objects = (new Enumerator)->enumerate($lazy);
+
+        $this->assertFalse($initialized);
+        $this->assertCount(1, $objects);
+        $this->assertSame($lazy, $objects[0]);
+    }
+
+    public function testDoesNotInitializeLazyObjectThatIsAggregatedByAnotherObject(): void
+    {
+        $initialized = false;
+
+        $lazy = (new ReflectionClass(ClassWithPublicProperties::class))->newLazyGhost(
+            static function (ClassWithPublicProperties $object) use (&$initialized): void
+            {
+                $initialized = true;
+
+                $object->object = new stdClass;
+            },
+        );
+
+        $a          = new stdClass;
+        $a->wrapped = [$lazy];
+
+        $objects = (new Enumerator)->enumerate($a);
+
+        $this->assertFalse($initialized);
+        $this->assertCount(2, $objects);
+        $this->assertSame($a, $objects[0]);
+        $this->assertSame($lazy, $objects[1]);
+    }
+
+    public function testEnumeratesObjectsAggregatedByInitializedLazyObject(): void
+    {
+        $a = new stdClass;
+        $b = new stdClass;
+
+        $lazy = (new ReflectionClass(ClassWithPublicProperties::class))->newLazyGhost(
+            static function (ClassWithPublicProperties $object) use ($a, $b): void
+            {
+                $object->object = $a;
+                $object->array  = [$b];
+            },
+        );
+
+        (new ReflectionClass(ClassWithPublicProperties::class))->initializeLazyObject($lazy);
+
+        $objects = (new Enumerator)->enumerate($lazy);
+
+        $this->assertCount(3, $objects);
+        $this->assertSame($lazy, $objects[0]);
+        $this->assertSame($a, $objects[1]);
+        $this->assertSame($b, $objects[2]);
     }
 
     public function testEnumeratesClassThatThrowsException(): void
